@@ -5,6 +5,9 @@ This repo documents two **clear paths** for getting an RK1 (RK3588) on a Turing 
 - **A) Just Install (recommended):** download prebuilt images and run exact commands.
 - **B) Build From Source:** build your own `bootloader-only-rk1.img` (idbloader + U-Boot), then use the same flashing flow.
 
+Why this way? -because i wanted to do everything without physically touching the device itself.
+if you have a nvme-usb adapter, just flash the device directly and you can skip the pre-stage-OS thing.
+
 > Assumptions: you run commands from an **Ubuntu** box (22.04/24.04), you have BMC access to your Turing Pi, and your examples target **node 3**. Adapt `--node` if you use a different slot.
 
 ---
