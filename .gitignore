@@ -1,0 +1,41 @@
+# General ignores
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.env
+
+# Visual Studio Code
+.vscode/
+
+# macOS
+._*
+
+# Windows
+ntuser.dat*
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs and databases
+*.sqlite
+*.db
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# Secrets
+.env
+*.key
+*.pem
+
+# Project specific
