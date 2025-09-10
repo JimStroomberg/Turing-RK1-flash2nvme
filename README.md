@@ -90,15 +90,16 @@ Do these **on the RK1** (logged into the staging Ubuntu on eMMC):
 
 0) **Download the Ubuntu image inside the staging OS**
 If you did not copy the Ubuntu image to the RK1 staging OS, you can download it directly. For example, use `wget` to fetch the image from Joshua Riek's repository:
-`wget https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04-preinstalled-server-arm64-turing-rk1.img.xz`
+`wget https://github.com/Joshua-Riek/ubuntu-rockchip/releases/download/v2.4.0/ubuntu-24.04-preinstalled-server-arm64-turing-rk1.img.xz`
 After downloading, uncompress the `.xz` file before writing it to NVMe:
+`xz -d ubuntu-24.04-preinstalled-server-arm64-turing-rk1.img.xz`
+
 
 1) **Write the same Ubuntu image to NVMe**
 ```bash
-sudo dd if=/path/to/ubuntu-24.04-preinstalled-server-arm64-turing-rk1.img \
+sudo dd if=ubuntu-24.04-preinstalled-server-arm64-turing-rk1.img \
         of=/dev/nvme0n1 bs=4M status=progress oflag=direct,sync
 sync
-sudo partprobe /dev/nvme0n1
 ```
 
 2) **Grow the root partition to full disk** (optional but recommended)
@@ -106,8 +107,8 @@ sudo partprobe /dev/nvme0n1
 # Enlarge partition 2 to 100% (use parted or gdisk)
 sudo parted /dev/nvme0n1 ---pretend-input-tty <<'EOF'
 print
+Fix
 resizepart 2 100%
-Yes
 quit
 EOF
 
@@ -179,8 +180,7 @@ cat /proc/cmdline      # expect: root=PARTUUID=<nvme0n1p2 UUID>
 df -h /                # expect: / on /dev/nvme0n1p2
 ```
 
-If it still boots eMMC, re-check that **NVMe’s** `/boot/extlinux/extlinux.conf` points to the **NVMe** PARTUUID, not an old eMMC UUID.
-
+Done!
 ---
 
 ## B) Build From Source
